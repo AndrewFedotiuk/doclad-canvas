@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Shower Presentation Engine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+    </style>
+</head>
+
+<body class="shower list">
+
+    <header class="caption">
+        <h1>«Canvas API как инструмент для работы с графикой»</h1>
+        <p>Andrew Fedotiuk</p>
+    </header>
+
+    <section class="slide" id="slide1">
+        <h2>«Canvas API как инструмент для работы с графикой»</h2>
+        <main>
+            <img src="pictures/photo.jpg" class="photo" alt="My photo" width="200px" height="200px" />
+            <img src="pictures/wals.jpeg" class="cover" alt="cover" />
+            <p>Andrew Fedotiuk</p>
+            <p>Front End Developer ( <a href="mailto:cc6.magister@gmail.com">cc6.magister@gmail.com</a> )</p>
+        </main>
+
+
+        <style>
+            #slide1 {
+                color: white;
+            }
+
+            #slide1 .cover {
+                width: 100%;
+                filter: brightness(0.25);
+            }
+
+            #slide1 h2 {
+                font-size: 36px;
+                color: white;
+                text-align: center;
+                margin-top: 30px;
+            }
+
+            #slide1 main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="slide2">
+        <img src="pictures/graph.jpeg" class="graph" alt="Bitcoin graph" width="350px" />
+
+        <ul>
+            <li class="next">Вставить картинкой</li>
+            <li class="next">DOM</li>
+            <li class="next">SVG</li>
+            <li class="next">Canvas</li>
+        </ul>
+
+        <style>
+            #slide2 .graph {
+                display: block;
+                filter: invert() contrast(1.2) grayscale(1);
+                margin: 0 auto 20px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="slide3">
+        <h2>&lt;<a href="http://localhost:1234/slide3/index.html">canvas</a> /&gt;</h2>
+        <p> Создан компанией Apple в 2004 году, вошел в стандарт в 2006. <br />
+            HTML элемент, является частью HTML5, позволяет на низком уровне динамически
+            взаимодействовать с растровой графикой - визуализировать данные, манипулировать
+            изображением, фотографиями, создавать анимации и даже обрабатывать видео в реальном
+            времени. <br />
+        </p>
+        <pre class="small">
+            <code><mark>&lt;canvas id=&quot;mainCanvas&quot; width=&quot;640&quot; height=&quot;480&quot;&gt;</mark>  <mark class="important">?</mark>  <mark>&lt;/canvas&gt;</mark></code>
+        </pre>
+
+        <style>
+            #slide3 .small {
+                font-size: 22px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="slide4">
+        <h2>Контекст рендеринга (canvas grid)</h2>
+        <div class="columns two">
+            <div>
+                <img src="pictures/context.png" class="context-graph" alt="Context graph" width="200px"
+                    height="200px" />
+                <iframe src="http://localhost:1234/slide4/index.html" frameborder="0" width="220" height="200"></iframe>
+            </div>
+            <div>
+                <pre class="code">
+                    <code>const canvas = document.getElementById("mainCanvas");</code>
+                    <code>const ctx = canvas.getContext("<mark>2d</mark>");</code>
+                    <code> </code>
+                    <code>ctx.fillStyle = "blue";</code>
+                    <code>ctx.fillRect(50, 50, 150, 150);</code>
+                </pre>
+                <p class="text">Для того что бы отобразить на canvas что либо необходимо получить доступ к его
+                    контексту, в данном
+                    случае поговорим о 2D контексте.</p>
+            </div>
+        </div>
+
+        <style>
+            #slide4 .code {
+                font-size: 18px;
+            }
+
+            #slide4 .text {
+                margin-top: 40px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="slide5">
+        <h2>Рисование фигур (<a href="http://localhost:1234/slide5/index.html">прямоугольник</a>)</h2>
+
+        <p> В отличии от SVG на canvas можно рисовать только 2 фигуры: прямоугольник и путь (списки точек,
+            соединенных линиями).</p>
+        <pre>
+            <code>ctx.<mark>fillStyle</mark> = "red";</code>
+            <code>ctx.<mark>strokeStyle</mark> = "#ccc";</code>
+            <code>ctx.<mark>fillRect</mark>(x, y, w, h);</code>
+            <code>ctx.<mark>strokeRect</mark>(x, y, w, h);</code>
+            <code>ctx.<mark>clearRect</mark>(x, y, w, h);</code>
+        </pre>
+
+    </section>
+
+    <section class="slide" id="slide6">
+        <h2>Рисование фигур - линия (<a href="http://localhost:1234/slide6/index.html">путь</a>)</h2>
+
+        <figure>
+            <blockquote>
+                <p>У самурая нет цели, только путь...</p>
+            </blockquote>
+            <figcaption>Жизнь самурая Миямото Мусаси</figcaption>
+        </figure>
+
+        <div class="columns two">
+            <pre>
+                <code>ctx.<mark>beginPath</mark>();</code>
+                <code>ctx.<mark>moveTo</mark>(x, y);</code>
+                <code>ctx.<mark>lineTo</mark>(x, y);</code>
+                <code>ctx.<mark>closePath</mark>(); / -</code>
+                <code>ctx.<mark>stroke</mark>(); / ctx.<mark>fill</mark>();</code>
+            </pre>
+            <div>
+                <pre>
+                    <code>ctx.<mark>lineWidth</mark> = 10;</code>
+                    <code>ctx.<mark>lineCap</mark> = "butt" || "round" || "square";</code>
+                    <code>ctx.<mark>lineJoin</mark> = "bevel" || "round" || "miter"</code>
+                    <code>ctx.<mark>setLineDash</mark> = [] || [1,1]</code>
+                </pre>
+            </div>
+        </div>
+
+        <style>
+            #slide6 .columns {
+                font-size: 18px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="slide7">
+        <h2>Рисование фигур - дуга/кривая (<a href="http://localhost:1234/slide7/index.html">путь</a>)</h2>
+        <pre>
+            <code>ctx.<mark>arc</mark>(x,y,radius,startAngle,endAngle,[,counterclockwise])</code>
+            <code>ctx.<mark>arcTo</mark>(x1,y1,x2,y2,radius)</code>
+            <code>ctx.<mark>quadraticCurveTo</mark>(cpx,cpy,endX,endY)</code>
+            <code>ctx.<mark>bezierCurveTo</mark>(cpx1,cpy1,cpx2,cpy2,endX,endY)</code>
+        </pre>
+        <img src="pictures/arc.png" class="curves-img" alt="Canvas arc" width="340px" height="150px">
+        <img src="pictures/arcTo.png" class="curves-img" alt="Canvas arcTo" width="250px" height="150px">
+        <img src="pictures/canvas_curves.png" class="curves-img2" alt="Canvas curves" width="200px" height="200px">
+
+        <style>
+            #slide7 .curves-img {
+                position: relative;
+                top: -70px;
+            }
+
+            #slide7 .curves-img2 {
+                position: relative;
+                top: -30px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="slide8">
+        <h2><a href="http://localhost:1234/slide8/index.html">Градиенты</a></h2>
+        <pre class="code">
+            <code>const linGrad = ctx.<mark>createLinearGradient</mark>(startX, startY, endX, endY);</code>
+            <code>const radGrad = ctx.<mark>createRadialGradient</mark>(startXin, startYin, rIn,</code>
+            <code>startXOut, startYOut, rOut);</code>
+            <code> </code>
+            <code>someGrad.<mark>addColorStop</mark>(offset, color);</code>
+        </pre>
+        <p>А вот конический градиент внезапно поддерживается только в Firefox</p>
+
+        <style>
+            #slide8 .code {
+                font-size: 20px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="slide9">
+        <h2><a href="http://localhost:1234/slide9/index.html">Текст и тени</a></h2>
+        <div class="columns two">
+            <pre class="code">
+                <code>сtx.<mark>fillText</mark>(text, x, y [, maxWidth]);</code>
+                <code>сtx.<mark>strokeText</mark>(text, x, y [, maxWidth]);</code>
+                <code>сtx.<mark>font</mark>="10px sans-serif"</code>
+                <code>сtx.<mark>textAlign</mark>="start"</code>
+                <code>сtx.<mark>textBaseline</mark>="alphabetic" || top ||</code>
+                <code>hanging || middle || ideographic || bottom</code>
+                <code>сtx.<mark>direction</mark>="inherit" || ltr || rtl</code>
+                <code> </code>
+                <code>const text = сtx.<mark>measureText</mark>("text");</code>
+            </pre>
+
+            <pre class="code">
+                <code>сtx.<mark>shadowOffsetX</mark>=float</code>
+                <code>сtx.<mark>shadowOffsetY</mark>=float</code>
+                <code>сtx.<mark>shadowBlur</mark>=float</code>
+                <code>сtx.<mark>shadowColor</mark>=float</code>
+            </pre>
+        </div>
+
+
+        <style>
+            #slide9 .code {
+                font-size: 18px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="slide10">
+        <h2><a href="http://localhost:1234/slide10/index.html">Изображение</a>:</h2>
+        <div class="columns two">
+            <ul>
+                <li>HTMLImageElement</li>
+                <li>SVGImageElement</li>
+                <li>HTMLVideoElement</li>
+                <li>HTMLCanvasElement</li>
+            </ul>
+            <img src="pictures/canvas_drawimage.jpeg" alt="Canvas arc" width="200x" height="200px">
+
+        </div>
+
+        <p><mark>drawImage</mark>(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)</p>
+        <p>ctx.<mark>createPattern</mark>(image, "repeat" || "repeat-x" || "repeat-y" || "no-repeat"); </p>
+    </section>
+
+    <section class="slide" id="slide11">
+        <h2>Наложение слоев, сглаживание, маски</h2>
+        <img src="pictures/smoothExample.png" alt="" width="400">
+        <img src="pictures/compositionOperation.png" alt="" width="400">
+
+        <div class="columns two">
+            <img src="pictures/clip.png" alt="" width="200">
+            <pre>
+                <code>ctx.<mark>imageSmoothingEnabled</mark> = boolean;</code>
+                <code>ctx.<mark>globalCompositeOperation</mark> = type;</code>
+                <code>ctx.<mark>globalAlpha</mark> = 1;</code>
+                <code>ctx.<mark>clip</mark>();</code>
+            </pre>
+        </div>
+    </section>
+
+    <section class="slide" id="slide12">
+        <h2><a href="http://localhost:1234/slide12/index.html">Работа с пикселями / сохранение canvas</a></h2>
+        <pre class="code">
+            <code>const myImageData = ctx.<mark>getImageData</mark>(left, top, width, height);</code>
+            <code> </code>
+            <code>canvas.<mark>toDataURL</mark>('image/png');</code>
+            <code>canvas.<mark>toDataURL</mark>('image/jpeg', quality);</code>
+            <code>canvas.<mark>toBlob</mark>(_callback_, _type_, _encoderOptions_)</code>
+        </pre>
+
+        <style>
+            #slide12 .code {
+                font-size: 22px;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="slide13">
+        <h2><a href="http://localhost:1234/slide13/index.html">События и анимация</a></h2>
+        <p> Как таковых ивентов в canvas <mark>нет</mark>, но мы всегда можем использовать DOM-ивенты, а так же рисовать
+            на canvas по истечению определенного времени. Для этого можно использовать несколько методов:</p>
+        <ul>
+            <li>setInterval(function, delay)</li>
+            <li>setTimeout(function, delay)</li>
+            <li>requestAnimationFrame(callback)</li>
+        </ul>
+    </section>
+
+    <section class="slide" id="slide14">
+        <h2>Разделение на слои и хитбоксы</h2>
+        <img src="pictures/chicken.jpeg" width="500" alt="">
+        <img src="pictures/game-layering.jpeg" class="layer" alt="">
+        <style>
+            #slide14 .layer {
+                margin: auto;
+                top: -30%;
+                left: 90px;
+                position: relative;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="slide15">
+        <h2><a href="http://localhost:1234/slide15/index.html">Трансформации и повороты</a></h2>
+        <div class="columns two">
+            <div>
+                <img src="pictures/transform.png" width="180" alt=""><br>
+                <img src="pictures/rotate.png" width="180" alt="">
+            </div>
+            <pre>
+                <code>ctx.<mark>save</mark>()</code>
+                <code>ctx.<mark>restore</mark>()</code>
+                <code> </code>
+                <code>ctx.<mark>translate</mark>(x, y)</code>
+                <code>ctx.<mark>rotate</mark>(angle)</code>
+                <code>ctx.<mark>scale</mark>(x,y)</code>
+            </pre>
+        </div>
+    </section>
+
+    <section class="slide" id="slide16">
+        <h2>Что же дальше?</h2>
+        <ul>
+            <li><a href="https://konvajs.org/">Konva.js (by Anton Lavrenov)</a></li>
+            <li><a href="https://pixijs.io/">PIXI.js</a></li>
+            <li><a href="https://phaser.io/">Phaser.js</a></li>
+            <br>
+            <li><a href="https://threejs.org/">three.js</a></li>
+            <li><a href="https://www.babylonjs.com/">babylon.js</a></li>
+            <li><a href="https://playcanvas.com/">playcanvas</a></li>
+        </ul>
+    </section>
+
+    <section class="slide" id="slide17">
+        <h2>Ресурсы</h2>
+        <ol>
+            <li><a href="https://shwr.me/">shower(движок презентации)</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Canvas">developer.mozilla</a></li>
+            <li><a href="https://www.w3schools.com/tags/ref_canvas.asp">w3schools</a></li>
+            <li><a
+                    href="https://stackoverflow.com/search?q=canvas&s=ea473ec7-8df9-4068-9355-21574bdde97e">stackoverflow</a>
+            </li>
+            <li><a href="https://www.html5gamedevs.com/">html5gamedevs (форум)</a></li>
+            <li><a href="https://t.me/gamedevforweb">GameDev for Web (телеграм чатик где всегда помогут)</a></li>
+        </ol>
+    </section>
+
+    <section class="slide" id="slide18">
+        <iframe src="http://localhost:1234/game/index.html" width="650" height="504" frameborder="0"></iframe>
+
+        <style>
+            #slide18 iframe {
+                display: block;
+                margin: 0 auto;
+            }
+        </style>
+    </section>
+
+    <section class="slide" id="lastSlide">
+        <h2 class="shout shrink">Спасибо за внимание</h2>
+        <img src="pictures/wals.jpeg" class="cover" alt="cover" />
+        <style>
+            #lastSlide {
+                color: white;
+            }
+
+            #lastSlide .cover {
+                width: 100%;
+                filter: brightness(0.25);
+            }
+
+            #lastSlide h2 {
+                color: white;
+            }
+        </style>
+    </section>
+
+    <footer class="badge">
+        <a href="https://github.com/shower/shower">Fork me on GitHub</a>
+    </footer>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+
+</html>
