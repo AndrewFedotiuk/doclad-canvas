@@ -15,15 +15,15 @@ export default class Game {
 		canvas.addEventListener("click", (event) => {
 			const {top, left} = canvas.getBoundingClientRect();
 
-			const x = (event.pageX - left);
-			const y = (event.pageY - top);
+			const x = (event.clientX - left);
+			const y = (event.clientY - top);
 
 			for (let index = 0; index < this.gameItems.length; index++) {
 				const fruit = this.gameItems[index];
 
 				if (this.isInteracted(x,y,fruit) && fruit.hasInteraction){
-					if(fruit.score = -Infinity){
-						alert(`You lose, you score is ${this.score}!`);
+					if(fruit.score === -Infinity){
+						alert(`You score is ${this.score}!`);
 						location.reload();
 					}
 					if (fruit.score){

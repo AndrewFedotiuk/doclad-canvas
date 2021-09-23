@@ -1,5 +1,5 @@
-import { getRandomBetween } from "./src/helpers/randomFrom";
 export { };
+import { getRandomBetween } from "./src/helpers/randomFrom";
 import Game from "./src/components/Game";
 import ImageLoader from "./src/components/imageLoader";
 import { imageList } from "./src/helpers/imageList";
@@ -37,10 +37,9 @@ const gameLoop = () => {
 
 const startGame = () => {
 	gameLoop();
-	game.addGameItem(imageLoaderInstance.imageCache[getRandomBetween(0, imageLoaderInstance.imageCache.length - 1)]);
-	game.addGameItem(imageLoaderInstance.imageCache[getRandomBetween(0, imageLoaderInstance.imageCache.length - 1)]);
-	game.addGameItem(imageLoaderInstance.imageCache[getRandomBetween(0, imageLoaderInstance.imageCache.length - 1)]);
-	game.addGameItem(imageLoaderInstance.imageCache[getRandomBetween(0, imageLoaderInstance.imageCache.length - 1)]);
+	for (let index = 0; index < 5; index++) {
+		game.addGameItem(imageLoaderInstance.imageCache[getRandomBetween(0, imageLoaderInstance.imageCache.length - 1)]);
+	}
 }
 
 const imageLoaderInstance = new ImageLoader(startGame);
